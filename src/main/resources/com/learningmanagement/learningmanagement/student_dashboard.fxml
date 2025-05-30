@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.effect.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.learningmanagement.learningmanagement.controllers.StudentDashboardController"
+            prefHeight="800.0" prefWidth="1200.0">
+
+    <top>
+        <VBox>
+            <!-- Menu Bar -->
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem fx:id="logoutMenuItem" text="Logout" onAction="#handleLogout" />
+                    <SeparatorMenuItem />
+                    <MenuItem text="Exit" onAction="#handleExit" />
+                </Menu>
+                <Menu text="Courses">
+                    <MenuItem text="My Courses" onAction="#showMyCourses" />
+                    <MenuItem text="Available Courses" onAction="#showAvailableCourses" />
+                    <MenuItem text="Course Materials" onAction="#showCourseMaterials" />
+                </Menu>
+                <Menu text="Assignments">
+                    <MenuItem text="View Assignments" onAction="#showAssignments" />
+                    <MenuItem text="Submit Assignment" onAction="#showSubmissionForm" />
+                    <MenuItem text="My Grades" onAction="#showGrades" />
+                </Menu>
+                <Menu text="Messages">
+                    <MenuItem text="View Messages" onAction="#showMessages" />
+                    <MenuItem text="Mark All Read" onAction="#markAllMessagesRead" />
+                </Menu>
+            </MenuBar>
+
+            <!-- Header Bar -->
+            <HBox style="-fx-background-color: #4CAF50; -fx-padding: 10;">
+                <Label text="Student Dashboard - Learning Management System"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="currentStudentLabel" text="Welcome, Student"
+                       style="-fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 0 10 0 0;" />
+                <Button fx:id="logoutButton" text="Logout" onAction="#handleLogout"
+                        style="-fx-background-color: #C62828; -fx-text-fill: white;">
+                    <effect>
+                        <DropShadow color="#000000" radius="3" offsetX="2" offsetY="2" />
+                    </effect>
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox style="-fx-background-color: #E8F5E9; -fx-padding: 10; -fx-spacing: 10;" prefWidth="250.0">
+            <Label text="Student Functions" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+            <Separator />
+
+            <!-- Course Access Section -->
+            <Label text="📚 Course Access" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+            <Button fx:id="myCoursesButton" text="📖 My Courses" onAction="#showMyCourses"
+                    style="-fx-pref-width: 220.0; -fx-alignment: CENTER-LEFT;">
+                <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+            </Button>
+
+            <Button fx:id="availableCoursesButton" text="🔍 Available Courses" onAction="#showAvailableCourses"
+                    style="-fx-pref-width: 220.0; -fx-alignment: CENTER-LEFT;">
+                <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+            </Button>
+
+            <Button fx:id="courseMaterialsButton" text="📄 Course Materials" onAction="#showCourseMaterials"
+                    style="-fx-pref-width: 220.0; -fx-alignment: CENTER-LEFT;">
+                <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+            </Button>
+
+            <!-- Assignment Section -->
+            <Label text="📝 Assignments" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+            <Button fx:id="assignmentsButton" text="📋 View Assignments" onAction="#showAssignments"
+                    style="-fx-pref-width: 220.0; -fx-alignment: CENTER-LEFT;">
+                <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+            </Button>
+
+            <Button fx:id="submitAssignmentButton" text="📤 Submit Assignment" onAction="#showSubmissionForm"
+                    style="-fx-pref-width: 220.0; -fx-alignment: CENTER-LEFT;">
+                <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+            </Button>
+
+            <Button fx:id="gradesButton" text="📊 My Grades" onAction="#showGrades"
+                    style="-fx-pref-width: 220.0; -fx-alignment: CENTER-LEFT;">
+                <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+            </Button>
+
+            <!-- Communication Section -->
+            <Label text="💬 Communication" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+            <Button fx:id="messagesButton" text="📧 Messages" onAction="#showMessages"
+                    style="-fx-pref-width: 220.0; -fx-alignment: CENTER-LEFT;">
+                <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+            </Button>
+
+            <Separator />
+
+            <!-- Progress Overview -->
+            <VBox spacing="5" style="-fx-padding: 10; -fx-background-color: #F1F8E9; -fx-border-radius: 5;">
+                <Label text="Progress Overview" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+                <Label text="Overall Progress:" style="-fx-font-size: 10px;" />
+                <ProgressBar fx:id="overallProgressBar" prefWidth="200" />
+                <Label fx:id="overallProgressLabel" text="0%" style="-fx-font-size: 10px;" />
+                <Label fx:id="enrolledCoursesLabel" text="Enrolled Courses: 0" style="-fx-font-size: 10px;" />
+                <Label fx:id="unreadMessagesLabel" text="Unread Messages: 0" style="-fx-font-size: 10px;" />
+            </VBox>
+
+            <!-- Animated Enroll Button -->
+            <Button fx:id="enrollButton" text="🎓 Enroll in Course" onAction="#showAvailableCourses"
+                    style="-fx-pref-width: 220.0; -fx-background-color: #FF9800; -fx-text-fill: white;">
+                <effect>
+                    <DropShadow color="GRAY" radius="5" spread="0.2" />
+                </effect>
+            </Button>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentStackPane">
+            <!-- Dashboard Overview -->
+            <VBox fx:id="dashboardPane" alignment="CENTER" spacing="20" style="-fx-padding: 30;">
+                <Label text="Welcome to Student Dashboard" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+                <Label text="Select a function from the left menu to get started"
+                       style="-fx-font-size: 14px; -fx-text-fill: #666666;" />
+
+                <!-- Quick Stats Cards -->
+                <HBox spacing="20" alignment="CENTER">
+                    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20; -fx-background-color: #E3F2FD; -fx-border-radius: 10;">
+                        <Label text="Course Progress" style="-fx-font-weight: bold;" />
+                        <ProgressIndicator fx:id="progressIndicator" prefWidth="60" prefHeight="60" />
+                        <Label fx:id="progressLabel" text="0%" style="-fx-font-size: 12px;" />
+                    </VBox>
+
+                    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20; -fx-background-color: #E8F5E9; -fx-border-radius: 10;">
+                        <Label text="Assignments Due" style="-fx-font-weight: bold;" />
+                        <Label fx:id="assignmentsDueLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+                        <Label text="This Week" style="-fx-font-size: 12px;" />
+                    </VBox>
+
+                    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20; -fx-background-color: #FFF3E0; -fx-border-radius: 10;">
+                        <Label text="Average Grade" style="-fx-font-weight: bold;" />
+                        <Label fx:id="averageGradeLabel" text="0.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+                        <Label text="All Courses" style="-fx-font-size: 12px;" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- My Courses Pane -->
+            <VBox fx:id="myCoursesPane" spacing="15" style="-fx-padding: 20;" visible="false">
+                <Label text="My Enrolled Courses" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+                <ScrollPane fx:id="courseScrollPane" prefHeight="400" fitToWidth="true">
+                    <VBox fx:id="courseList" spacing="10" />
+                </ScrollPane>
+
+                <Pagination fx:id="pagination" pageCount="5" />
+            </VBox>
+
+            <!-- Available Courses Pane -->
+            <VBox fx:id="availableCoursesPane" spacing="15" style="-fx-padding: 20;" visible="false">
+                <Label text="Available Courses for Enrollment" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+                <ScrollPane prefHeight="400" fitToWidth="true">
+                    <TableView fx:id="availableCoursesTable" prefHeight="380">
+                        <columns>
+                            <TableColumn fx:id="courseIdColumn" text="ID" prefWidth="60" />
+                            <TableColumn fx:id="courseNameColumn" text="Course Name" prefWidth="300" />
+                            <TableColumn fx:id="instructorColumn" text="Instructor" prefWidth="200" />
+                            <TableColumn fx:id="enrolledCountColumn" text="Enrolled Students" prefWidth="150" />
+                        </columns>
+                    </TableView>
+                </ScrollPane>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="enrollInCourseButton" text="📚 Enroll in Selected Course" onAction="#enrollInCourse"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                </HBox>
+            </VBox>
+
+            <!-- Course Materials Pane -->
+            <VBox fx:id="courseMaterialsPane" spacing="15" style="-fx-padding: 20;" visible="false">
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <Label text="Course Materials" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <ComboBox fx:id="materialCourseFilter" promptText="Select Course" onAction="#filterMaterialsByCourse" />
+                </HBox>
+
+                <ScrollPane prefHeight="400" fitToWidth="true">
+                    <TableView fx:id="materialsTable" prefHeight="380">
+                        <columns>
+                            <TableColumn fx:id="materialNameColumn" text="Material Name" prefWidth="250" />
+                            <TableColumn fx:id="materialTypeColumn" text="Type" prefWidth="100" />
+                            <TableColumn fx:id="materialTopicColumn" text="Topic" prefWidth="200" />
+                            <TableColumn fx:id="materialDateColumn" text="Upload Date" prefWidth="150" />
+                        </columns>
+                    </TableView>
+                </ScrollPane>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="downloadMaterialButton" text="📥 Download Material" onAction="#downloadMaterial"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                </HBox>
+            </VBox>
+
+            <!-- Assignments Pane -->
+            <VBox fx:id="assignmentsPane" spacing="15" style="-fx-padding: 20;" visible="false">
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <Label text="My Assignments" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <ComboBox fx:id="assignmentCourseFilter" promptText="Select Course" onAction="#filterAssignmentsByCourse" />
+                    <ComboBox fx:id="assignmentStatusFilter" promptText="Filter by Status" onAction="#filterAssignmentsByStatus" />
+                </HBox>
+
+                <ScrollPane prefHeight="400" fitToWidth="true">
+                    <TableView fx:id="assignmentsTable" prefHeight="380">
+                        <columns>
+                            <TableColumn fx:id="assignmentNameColumn" text="Assignment" prefWidth="200" />
+                            <TableColumn fx:id="assignmentCourseColumn" text="Course" prefWidth="150" />
+                            <TableColumn fx:id="assignmentDueDateColumn" text="Due Date" prefWidth="150" />
+                            <TableColumn fx:id="assignmentMaxPointsColumn" text="Max Points" prefWidth="100" />
+                            <TableColumn fx:id="assignmentStatusColumn" text="Status" prefWidth="120" />
+                            <TableColumn fx:id="assignmentGradeColumn" text="Grade" prefWidth="80" />
+                        </columns>
+                    </TableView>
+                </ScrollPane>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="viewAssignmentButton" text="👁️ View Details" onAction="#viewAssignmentDetails"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                    <Button fx:id="submitAssignmentDetailsButton" text="📤 Submit Assignment" onAction="#submitAssignment"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                </HBox>
+            </VBox>
+
+            <!-- Assignment Submission Pane -->
+            <VBox fx:id="submissionPane" spacing="15" style="-fx-padding: 20;" visible="false">
+                <Label text="Submit Assignment" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Select Assignment:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="submissionAssignmentCombo" prefWidth="300" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label text="Submission Text:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextArea fx:id="submissionTextArea" prefRowCount="8" prefWidth="400"
+                              GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="2" />
+
+                    <Label text="Upload File (Optional):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <TextField fx:id="selectedFileField" prefWidth="250" editable="false" />
+                        <Button fx:id="selectFileButton" text="Browse..." onAction="#selectFile" />
+                    </HBox>
+                </GridPane>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="submitButton" text="📤 Submit Assignment" onAction="#submitAssignmentForm"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                    <Button fx:id="clearFormButton" text="🗑️ Clear Form" onAction="#clearSubmissionForm"
+                            style="-fx-background-color: #F44336; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                </HBox>
+            </VBox>
+
+            <!-- Grades Pane -->
+            <VBox fx:id="gradesPane" spacing="15" style="-fx-padding: 20;" visible="false">
+                <Label text="My Grades" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+                <ScrollPane prefHeight="400" fitToWidth="true">
+                    <TableView fx:id="gradesTable" prefHeight="380">
+                        <columns>
+                            <TableColumn fx:id="gradeAssignmentColumn" text="Assignment" prefWidth="200" />
+                            <TableColumn fx:id="gradeCourseColumn" text="Course" prefWidth="150" />
+                            <TableColumn fx:id="gradePointsColumn" text="Points Earned" prefWidth="120" />
+                            <TableColumn fx:id="gradeMaxPointsColumn" text="Max Points" prefWidth="100" />
+                            <TableColumn fx:id="gradePercentageColumn" text="Percentage" prefWidth="100" />
+                            <TableColumn fx:id="gradeFeedbackColumn" text="Feedback" prefWidth="250" />
+                        </columns>
+                    </TableView>
+                </ScrollPane>
+
+                <!-- Grade Statistics -->
+                <HBox spacing="20" alignment="CENTER">
+                    <VBox spacing="5" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #E8F5E9; -fx-border-radius: 5;">
+                        <Label text="Overall Average" style="-fx-font-weight: bold;" />
+                        <Label fx:id="overallAverageLabel" text="0.0%" style="-fx-font-size: 18px;" />
+                    </VBox>
+                    <VBox spacing="5" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #E3F2FD; -fx-border-radius: 5;">
+                        <Label text="Assignments Graded" style="-fx-font-weight: bold;" />
+                        <Label fx:id="gradedAssignmentsLabel" text="0" style="-fx-font-size: 18px;" />
+                    </VBox>
+                    <VBox spacing="5" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #FFF3E0; -fx-border-radius: 5;">
+                        <Label text="Pending Grades" style="-fx-font-size: 18px;" />
+                        <Label fx:id="pendingGradesLabel" text="0" style="-fx-font-size: 18px;" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- Messages Pane -->
+            <VBox fx:id="messagesPane" spacing="15" style="-fx-padding: 20;" visible="false">
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <Label text="Messages and Notifications" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button fx:id="markAllReadButton" text="✓ Mark All Read" onAction="#markAllMessagesRead"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                </HBox>
+
+                <ScrollPane prefHeight="400" fitToWidth="true">
+                    <TableView fx:id="messagesTable" prefHeight="380">
+                        <columns>
+                            <TableColumn fx:id="messageTypeColumn" text="Type" prefWidth="80" />
+                            <TableColumn fx:id="messageSenderColumn" text="From" prefWidth="120" />
+                            <TableColumn fx:id="messageSubjectColumn" text="Subject" prefWidth="200" />
+                            <TableColumn fx:id="messageContentColumn" text="Message" prefWidth="300" />
+                            <TableColumn fx:id="messageDateColumn" text="Date" prefWidth="150" />
+                            <TableColumn fx:id="messageReadColumn" text="Read" prefWidth="60" />
+                        </columns>
+                    </TableView>
+                </ScrollPane>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="markReadButton" text="✓ Mark as Read" onAction="#markMessageRead"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                    <Button fx:id="viewMessageButton" text="👁️ View Message" onAction="#viewMessage"
+                            style="-fx-background-color: #9C27B0; -fx-text-fill: white;">
+                        <effect><DropShadow color="#888888" radius="2" offsetX="1" offsetY="1" /></effect>
+                    </Button>
+                </HBox>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

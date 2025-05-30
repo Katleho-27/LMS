@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.learningmanagement.learningmanagement.controllers.RegisterController"
+      prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #8f87a3;">
+
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40" />
+    </padding>
+
+    <children>
+        <Label text="Register New Account"
+               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #412f73;" />
+        <Label text="Please fill the form below to continue"
+               style="-fx-font-size: 14px; -fx-text-fill: #412f73;" />
+
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #8f87a3; -fx-border-color: transparent;" maxHeight="500">
+            <VBox spacing="15" alignment="CENTER_LEFT"
+                  style="-fx-background-color: #aaacb3; -fx-padding: 30; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,1,2,0.1), 10, 0, 0, 10);">
+                <children>
+                    <Label text="Username" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    <TextField fx:id="usernameField" promptText="Enter username" maxWidth="Infinity"/>
+
+                    <Label text="Password" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    <PasswordField fx:id="passwordField" promptText="Enter password (min. 6 characters)" maxWidth="Infinity"/>
+
+                    <Label text="Confirm Password" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" maxWidth="Infinity"/>
+
+                    <Label text="Full Name" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    <TextField fx:id="fullNameField" promptText="Enter full name" maxWidth="Infinity"/>
+
+                    <Label text="Email" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    <TextField fx:id="emailField" promptText="Enter email" maxWidth="Infinity"/>
+
+                    <Label text="Role" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    <ComboBox fx:id="roleComboBox" promptText="Select role" maxWidth="Infinity"/>
+
+                    <HBox spacing="20" alignment="CENTER">
+                        <Button fx:id="registerButton" text="Register" onAction="#handleRegister"
+                                style="-fx-background-color: #388E3C; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"
+                                prefWidth="160" prefHeight="40" />
+                        <Button fx:id="backToLoginButton" text="Back to Login" onAction="#navigateToLogin"
+                                style="-fx-background-color: #BDBDBD; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"
+                                prefWidth="160" prefHeight="40" />
+                    </HBox>
+                </children>
+            </VBox>
+        </ScrollPane>
+    </children>
+</VBox>
